@@ -1,8 +1,8 @@
 .app {
-  max-width: 1048px;
+  max-width: 1600px;
   width: 100%;
   height: 100%;
-  padding: 30px;
+  padding: 5%;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -18,7 +18,7 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  max-height: calc(100vh - 200px);
+  max-height: 97vh;
 }
 
 .group_title{
@@ -31,8 +31,8 @@
   justify-content: flex-start;
   flex-direction: column;
   width: 40%;
-  padding: 40px 2% 20px 2%;
-  margin: 8px;
+  padding: 2%;
+  margin: 10px;
   border-radius: 2px;
 }
 
@@ -49,9 +49,13 @@
   flex-direction: column;
   
   width: 91%;
-  height: calc(100vh - 350px);
+  min-height: 65px;
   overflow-y: auto;
-  padding: 15px 15px;
+  padding: 15px;
+}
+
+.task_container{
+  min-height: 85px;
 }
 
 .paper_container_empty {
@@ -92,6 +96,31 @@
   flex-direction: row;
 }
 
+.flex-row {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
 .pointer {
   cursor: pointer;
+  align-items: center;
+}
+
+.modal-content{
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  padding: 15px 0;
+}
+
+.modal-list{
+  width: 100%;
+  padding-top: 15px;
+}
+
+@media (max-width: 800px) {
+  .content{
+    flex-direction: column;
+  }
 }

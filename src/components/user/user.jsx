@@ -1,4 +1,5 @@
 import React, {useEffect, useState, Fragment} from "react";
+import constants from './../../constants';
 import {Draggable} from 'react-beautiful-dnd';
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from '@material-ui/core/Paper';
@@ -10,7 +11,9 @@ import SearchIcon from '@material-ui/icons/Search';
 import YoutubeSearchedForIcon from '@material-ui/icons/YoutubeSearchedFor';
 import colors from './../colors';
 
-export default function Task({user, index, idSelected, selectUserID}) {
+const {user: userType, update, remove} = constants
+
+export default function User({user, index, idSelected, selectUserID, actions}) {
   const [newData, setNewData] = useState({});
   const [editMode, setEditMode] = useState(false);
   const [options, setOptions] = useState(false);
@@ -32,8 +35,22 @@ export default function Task({user, index, idSelected, selectUserID}) {
 
   const ome = () => setOptions(true);
   const oml = () => setOptions(false);
-  const sem = () => setEditMode(!editMode);
   const sui = () => selectUserID(user.id);
+  const sem = () => {
+    if(
+      user.nickname != newData.nickname || 
+      user.name != newData.name
+    ){
+      actions(userType, update, newData);
+    }
+    setEditMode(!editMode)
+  };
+  const deleteUser = () => 
+  {
+    actions(userType, remove, newData.id)
+  }
+
+  
 
   useEffect(() => {
     if(
@@ -58,7 +75,7 @@ export default function Task({user, index, idSelected, selectUserID}) {
             <InputBase className="user_name" 
             disabled={!editMode}
             placeholder="My Name" 
-            value={editMode ? newData.name : user.name} 
+            value={editMode ? newData.name : user.name ? user.name : ''} 
             onChange={(event) => {
               trackChanges("name", event.target.value);
             }}/>
@@ -76,7 +93,7 @@ export default function Task({user, index, idSelected, selectUserID}) {
               <div className="pointer" onClick={sem}>
                 {editMode ? <SaveIcon/> : <EditIcon/>}
               </div>
-              <div className="pointer" onClick={() => console.log("delete")}>
+              <div className="pointer" onClick={deleteUser}>
                 <DeleteIcon/>
               </div>
             </Fragment>:<Fragment/>} 
@@ -84,7 +101,7 @@ export default function Task({user, index, idSelected, selectUserID}) {
           <InputBase className="user_nickname" 
           disabled={!editMode}
           placeholder="My user nickname" 
-          value={editMode ? newData.nickname : user.nickname} 
+          value={editMode ? newData.nickname : user.nickname ? user.nickname: ''} 
           multiline
           onChange={(event) => {
             trackChanges("nickname", event.target.value);

@@ -1,4 +1,5 @@
 import React, {useEffect, useState, Fragment} from "react";
+import constants from './../../constants';
 import {Draggable} from 'react-beautiful-dnd';
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from '@material-ui/core/Paper';
@@ -9,7 +10,9 @@ import SaveIcon from '@material-ui/icons/Save';
 import DeleteIcon from '@material-ui/icons/Delete';
 import colors from './../colors';
 
-export default function Task({task, taskStates, index}) {
+const {task: taskType, update, remove} = constants
+
+export default function Task({task, taskStates, index, actions}) {
   const [newData, setNewData] = useState({});
   const [editMode, setEditMode] = useState(false);
   const [options, setOptions] = useState(false);
@@ -34,12 +37,26 @@ export default function Task({task, taskStates, index}) {
 
   const ome = () => setOptions(true);
   const oml = () => setOptions(false);
-  const sem = () => setEditMode(!editMode);
+  const sem = () => {
+    if(
+      task.description != newData.description || 
+      task.title != newData.title ||
+      task.state_id != newData.state_id
+    ){
+      actions(taskType, update, newData);
+    }
+    setEditMode(!editMode)
+  };
+  const deleteTask = () => 
+  {
+    actions(taskType, remove, newData.id)
+  }
 
   useEffect(() => {
     if(
       task.description != newData.description || 
-      task.title != newData.title
+      task.title != newData.title ||
+      task.state_id != newData.state_id
     ){
       setNewData(task);
     }
@@ -48,7 +65,7 @@ export default function Task({task, taskStates, index}) {
   return (
     <Draggable className={classes.draggable} draggableId={`${index}`} index={index}>
       {(provided) => (
-        <Paper className={`paper_container ${classes.paper}`}
+        <Paper className={`paper_container task_container ${classes.paper}`}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}
@@ -77,7 +94,7 @@ export default function Task({task, taskStates, index}) {
               <div className="pointer" onClick={sem}>
                 {editMode ? <SaveIcon/> : <EditIcon/>}
               </div>
-              <div className="pointer" onClick={() => console.log("delete")}>
+              <div className="pointer" onClick={deleteTask}>
                 <DeleteIcon/>
               </div>
             </Fragment>:<Fragment/>} 
