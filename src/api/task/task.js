@@ -12,6 +12,16 @@ const getAllTasks = async () => {
   }
 };
 
+const getAllTaskStates = async () => {
+  try {
+    const taskStates = await axios.get(`${server}/tasks/states`);
+    return taskStates.data;
+  } catch (err) {
+    console.log(`[getAllTaskStates:${err}]`);
+    return [];
+  }
+};
+
 const createTask = async (task) => {
   try {
     const response = await axios.post(`${server}/users/${task.userID}/tasks'`, task);
@@ -47,6 +57,7 @@ const apiTask = {
   createTask,
   updateTask,
   deleteTask,
+  getAllTaskStates,
 };
 
 export default apiTask;
