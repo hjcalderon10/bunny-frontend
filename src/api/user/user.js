@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const server = 'http://localhost:8080/api/v1';//'http://ec2-3-15-12-241.us-east-2.compute.amazonaws.com:8080/api/v1';
+const server = 'http://ec2-3-15-12-241.us-east-2.compute.amazonaws.com:8080/api/v1';
 
 const getAllUsers = async () => {
   try {
@@ -15,11 +15,11 @@ const getAllUsers = async () => {
 
 const createUser = async (user) => {
   try {
-    const response = await axios.post(`${server}/users'`, user);
-    return response.status;
+    const response = await axios.post(`${server}/users`, user);
+    return {statusCode: response.status, data: response.data};
   } catch(err) {
     console.log(err.response)
-    return err.response.status;
+    return {statusCode: err.response.status};
   }
 };
 
