@@ -95,11 +95,11 @@ export default function TaskModal({handleClose, open, actions, taskStates, idSel
             </div>
           </div>
           <div className='flex-row'>
-            <Button className={classes.button} variant='contained' onClick={createTask} disabled={(title || description) == false}>
-              Create
-            </Button>
             <Button className={classes.cancelButton} variant='contained' onClick={handleClose}>
               Cancel
+            </Button>
+            <Button className={classes.button} variant='contained' onClick={createTask} disabled={(title || description) == false}>
+              Create
             </Button>
           </div>
         </div>

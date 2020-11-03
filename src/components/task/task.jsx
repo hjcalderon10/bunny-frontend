@@ -22,7 +22,7 @@ export default function Task({task, taskStates, index, actions}) {
       backgroundColor: (task ? colors[(task.user_id%colors.length)]:'white')
     },
     select:{
-      color: 'black !important'
+      color: '#202020 !important'
     }
   }));
 

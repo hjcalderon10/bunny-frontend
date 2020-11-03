@@ -140,6 +140,12 @@ export default function App() {
     <div className="app">
       <div className="header">
         TODO Bunny App
+        <div className="author">
+          <p>Made by 
+          <a href="https://github.com/hjcalderon10"> Héctor J Calderón </a> 
+          for 
+          <a href="https://bunnystudio.com/"> Bunny Studios</a></p>
+        </div>
       </div>
       <div className="content">
         <Column array={users} type={user} idSelected={idSelected} 
@@ -148,12 +154,6 @@ export default function App() {
         <Column array={idSelected ? tasks.filter(tsk => tsk.user_id == idSelected) : tasks} 
         type={task} idSelected={idSelected} taskStates={taskStates} actions={actions}
         dragEndFunc={dragEndFunc}/>
-      </div>
-      <div className="footer">
-        <p>Made with <span>💪🏼 {`&`} ❤</span>️ by 
-        <a href="https://github.com/hjcalderon10"> Héctor J Calderón </a> 
-        for 
-        <a href="https://bunnystudio.com/"> Bunny Studios</a></p>
       </div>
     </div>
   );

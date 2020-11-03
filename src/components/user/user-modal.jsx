@@ -70,11 +70,11 @@ export default function UserModal({handleClose, open, actions}) {
             <TextField label="Nickname" placeholder="The unkown man" value={nickname} onChange={ocnn}/>
           </div>
           <div className='flex-row'>
-            <Button className={classes.button} variant='contained' onClick={createUser} disabled={(name || nickname) == false}>
-              Create
-            </Button>
             <Button className={classes.cancelButton} variant='contained' onClick={handleClose}>
               Cancel
+            </Button>
+            <Button className={classes.button} variant='contained' onClick={createUser} disabled={(name || nickname) == false}>
+              Create
             </Button>
           </div>
         </div>

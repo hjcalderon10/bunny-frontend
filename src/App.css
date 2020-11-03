@@ -72,12 +72,12 @@
 
 .task_title, .user_name{
   font-size: 1.5em !important;
-  color: black !important;
+  color: #202020 !important;
 }
 
 .task_description, .user_nickname{
   width: 100%;
-  color: black !important;
+  color: #202020 !important;
 }
 
 .user_nickname{
@@ -119,8 +119,25 @@
   padding-top: 15px;
 }
 
+.author{
+  font-size: 0.7rem;
+  text-align: right;
+}
+
 @media (max-width: 800px) {
   .content{
     flex-direction: column;
+  }
+
+  .column_container {
+    width: 100%;
+  }
+
+  .user_name {
+    width: 74%;
+  }
+
+  .grow {
+    flex-grow: 0;
   }
 }
