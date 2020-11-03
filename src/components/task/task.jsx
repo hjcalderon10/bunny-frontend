@@ -28,6 +28,9 @@ export default function Task({task, taskStates, index, actions}) {
 
   const classes = useStyles();
 
+  const titleChange = (event) => trackChanges("title", event.target.value)
+  const descriptionChange = (event) => trackChanges("description", event.target.value)
+  const evtChange = (event) => trackChanges("state_id", parseInt(event.target.value))
 
   const trackChanges = (attribute, data) => {
     let obj = {...newData};
@@ -58,6 +61,7 @@ export default function Task({task, taskStates, index, actions}) {
       task.title != newData.title ||
       task.state_id != newData.state_id
     ){
+      console.log(task)
       setNewData(task);
     }
   }, [task])
@@ -77,18 +81,19 @@ export default function Task({task, taskStates, index, actions}) {
             disabled={!editMode}
             placeholder="My title" 
             value={editMode ? newData.title : task.title} 
-            onChange={(event) => {
-              trackChanges("title", event.target.value);
-            }}/>
+            onChange={titleChange}/>
             <div className={"grow"} />
-            <Select className={classes.select}
-              native
-              disabled={!editMode}
-              onChange={(evt) => console.log(evt)}
-              value={task.state_id}
-            >
-              {taskStates.map((ts, idx) => <option key={idx} value={ts.id}>{ts.state}</option>)}
-            </Select>
+            {(taskStates && taskStates.length > 0) ? 
+              <Select className={classes.select}
+                native
+                disabled={!editMode}
+                onChange={evtChange}
+                defaultValue={`${task.state_id}`}
+              >
+                {taskStates.map((ts, idx) => <option key={idx} value={ts.id}>{ts.state}</option>)}
+              </Select> :
+              <Fragment/>
+            }
             {options ? 
             <Fragment>
               <div className="pointer" onClick={sem}>
@@ -104,9 +109,7 @@ export default function Task({task, taskStates, index, actions}) {
           placeholder="My task description" 
           value={editMode ? newData.description : task.description} 
           multiline
-          onChange={(event) => {
-            trackChanges("description", event.target.value);
-          }}/>
+          onChange={descriptionChange}/>
         </Paper>
       )}
     </Draggable>
