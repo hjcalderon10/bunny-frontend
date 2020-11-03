@@ -47,7 +47,7 @@ export default function TaskModal({handleClose, open, actions, taskStates, idSel
 
   useEffect(() => {
     if(taskStates && taskStates.length > 0){
-      setState(taskStates[0].id);
+      setState(parseInt(taskStates[0].id));
     }
   }, [taskStates])
 
@@ -55,13 +55,13 @@ export default function TaskModal({handleClose, open, actions, taskStates, idSel
     actions(task, create, {title: title.trim(), description: description.trim(), state_id: state, user_id: idSelected});
     setTitle('');
     setDescription('');
-    setState(taskStates[0].id);
+    setState(parseInt(taskStates[0].id));
     handleClose();
   }
 
   const ocn = (evt) => setTitle(evt.target.value)
   const ocnn = (evt) => setDescription(evt.target.value)
-  const ss = (evt) => setState(evt.target.value)
+  const ss = (evt) => setState(parseInt(evt.target.value))
 
   return (
     <Modal
@@ -88,7 +88,7 @@ export default function TaskModal({handleClose, open, actions, taskStates, idSel
               <Select className={classes.select}
                 native
                 onChange={ss}
-                value={task.state_id}
+                defaultValue={"1"}
               >
                 {taskStates.map((ts, idx) => <option key={idx} value={ts.id}>{ts.state}</option>)}
               </Select>

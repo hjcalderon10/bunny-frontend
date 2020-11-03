@@ -61,7 +61,6 @@ export default function Task({task, taskStates, index, actions}) {
       task.title != newData.title ||
       task.state_id != newData.state_id
     ){
-      console.log(task)
       setNewData(task);
     }
   }, [task])
@@ -83,7 +82,7 @@ export default function Task({task, taskStates, index, actions}) {
             value={editMode ? newData.title : task.title} 
             onChange={titleChange}/>
             <div className={"grow"} />
-            {(taskStates && taskStates.length > 0) ? 
+            {(taskStates && taskStates.length > 0 && task) ? 
               <Select className={classes.select}
                 native
                 disabled={!editMode}
