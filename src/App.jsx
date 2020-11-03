@@ -150,7 +150,10 @@ export default function App() {
         dragEndFunc={dragEndFunc}/>
       </div>
       <div className="footer">
-
+        <p>Made with <span>💪🏼 {`&`} ❤</span>️ by 
+        <a href="https://github.com/hjcalderon10"> Héctor J Calderón </a> 
+        for 
+        <a href="https://bunnystudio.com/"> Bunny Studios</a></p>
       </div>
     </div>
   );
